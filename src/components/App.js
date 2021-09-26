@@ -5,16 +5,15 @@ import { authService } from "fbase";
 function App() {
   // 구조 분해 할당
   const [init, setInit] = useState(false);
-  //const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // setInterval(function () {
-  //   console.log(authService.currentUser);
-  // }, 2000);
+  const [userObj, setUserObj] = useState(null);
+
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       //console.log(user));
       if (user) {
         setIsLoggedIn(user);
+        setUserObj(user);
       } else {
         setIsLoggedIn(false);
       }
@@ -25,7 +24,7 @@ function App() {
   return (
     <>
       {init ? (
-        <AppRouter isLoggedIn={isLoggedIn}></AppRouter>
+        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj}></AppRouter>
       ) : (
         "initializing..."
       )}
