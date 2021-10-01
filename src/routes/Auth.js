@@ -8,7 +8,6 @@ const Auth = () => {
   const [error, setError] = useState("");
 
   const onChange = (event) => {
-    //console.log(event.target.name);
     const {
       target: { name, value },
     } = event;
@@ -34,16 +33,14 @@ const Auth = () => {
         data = await authService.signInWithEmailAndPassword(email, password);
       }
       console.log(data);
-    } catch (error) {
-      //console.log(error);
-      setError(error.message);
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   const toggleAccount = () => setNewAccount((prev) => !prev);
 
   const onSocialClick = async (event) => {
-    //console.log(event.target.name);
     const {
       target: { name },
     } = event;
